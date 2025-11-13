@@ -1,4 +1,4 @@
-from data import Data
+from .data import Data
 import re #biblioteca de expressões regulares
 
 class Evento:
@@ -43,7 +43,7 @@ class Evento:
         try:
             if self.descricao_servicos == "":
                 self.postes = []
-                print(f"Aviso: Descrição de serviços vazia para evento em {self.bairro}")
+                #print(f"Aviso: Descrição de serviços vazia para evento em {self.bairro}")
                 return
 	        
 	        # Converte para string para garantir que podemos usar regex
@@ -60,7 +60,8 @@ class Evento:
 	        
 	        # Log informativo
             if not self.postes:
-                print(f"Aviso: Nenhum poste encontrado na descrição de {self}")
+                #print(f"Aviso: Nenhum poste encontrado na descrição de {self}")
+                pass
                 
         except Exception as e:
             self.postes = []  # Garante que a lista fique vazia em caso de erro

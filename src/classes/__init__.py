@@ -1,2 +1,2 @@
-from data import Data
-from evento import Evento
+from src.classes.data import Data
+from src.classes.evento import Evento

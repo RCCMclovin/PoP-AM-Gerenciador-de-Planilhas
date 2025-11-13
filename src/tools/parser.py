@@ -1,4 +1,7 @@
 import pandas as pd
+from src.classes import Evento
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl') #Desabilita warns de openpyxl, que ocorrem devido ao cabeçalho da planilha
 
 def parse_planilha(file_path):
     """
@@ -8,7 +11,7 @@ def parse_planilha(file_path):
     file_path (str): The path to the Excel file.
 
     Returns:
-    pd.DataFrame: The parsed data as a DataFrame.
+    eventos (list): The parsed data as list of events.
     """
     try:
         colunas = ['Data','Horário Inicial','Horário Final','Descrição de Serviços','Endereço','Bairro','Zona','Técnico','Status','Uso Mútuo']
@@ -16,8 +19,8 @@ def parse_planilha(file_path):
 
         df = pd.read_excel(file_path, usecols = colunas)
         df  = df[colunas2]
-
-        return df
+        
+        return [Evento(linha) for _, linha in df.iterrows()]
     except Exception as e:
         print(f"Error reading the Excel file: {e}")
         return None
@@ -26,4 +29,4 @@ if __name__ == "__main__":
     file_path = "./planilha/Cronograma_de_Linha_Morta_25-11-07.xlsx"
     df = parse_planilha(file_path)
     if df is not None:
-        print(df.head())
+        print(df[:5])
