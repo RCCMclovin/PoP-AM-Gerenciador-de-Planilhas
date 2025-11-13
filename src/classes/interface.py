@@ -17,6 +17,7 @@ class interface:
 		try:
 			if bool(re.match(r'^\d{10}$', str(poste))):
 				self.whitelist.append(poste) 
+				salvar_objeto(self.whitelist,'./data/poste_whitelist.pkl')
 			else: 
 				return
 		except Exception as e:
@@ -26,6 +27,7 @@ class interface:
 		try:
 			if bool(re.match(r'^\d{10}$', str(poste))):
 				self.whitelist.remove(poste) 
+				salvar_objeto(self.whitelist,'./data/poste_whitelist.pkl')
 			else: 
 				return
 		except Exception as e:
@@ -33,19 +35,17 @@ class interface:
 
 	def add_blacklist(self, bairro):
 		try:
-			if type(bairro) == type(str):
-				self.blacklist.append(bairro) 
-			else: 
-				return
+			self.blacklist.append(bairro) 
+			salvar_objeto(self.blacklist,'./data/bairro_blacklist.pkl')
+			
 		except Exception as e:
 			raise RuntimeError(f"Erro ao adicionar bairro na Blacklist {self}: {str(e)}")
 
 	def remove_blacklist(self, bairro):
 		try:
-			if type(bairro) == type(str):
-				self.blacklist.remove(bairro) 
-			else: 
-				return
+			self.blacklist.remove(bairro) 
+			salvar_objeto(self.blacklist,'./data/bairro_blacklist.pkl')
+			
 		except Exception as e:
 			raise RuntimeError(f"Erro ao remover bairro da Blacklist {self}: {str(e)}")
 
@@ -56,7 +56,7 @@ class interface:
 
 if __name__ == "__main__":
 
-	salvar_objeto(['outro bairro'], './data/bairro_blacklist.pkl')
+	salvar_objeto(['um bairro','outro bairro'], './data/bairro_blacklist.pkl')
 	salvar_objeto(['0987654321'], './data/poste_whitelist.pkl')
 	i = interface()
 	i.add_whitelist("1234567890")
