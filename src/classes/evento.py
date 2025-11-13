@@ -1,4 +1,4 @@
-import pandas as pd
+from data import Data
 import re #biblioteca de expressões regulares
 
 class Evento:
@@ -10,7 +10,7 @@ class Evento:
             linha_dataframe: Series do pandas com os dados da planilha
         """
         # Atributos da planilha
-        self.data = linha_dataframe['Data']
+        self.data = Data(str(linha_dataframe['Data']))
         self.horario_inicial = linha_dataframe['Horário Inicial']
         self.horario_final = linha_dataframe['Horário Final']
         self.endereco = linha_dataframe['Endereço']
@@ -36,36 +36,36 @@ class Evento:
         return f"Evento(data='{self.data}', bairro='{self.bairro}', endereco='{self.endereco}, postes='{self.postes}' ')"
 
     def _extrair_postes_da_descricao(self):
-	    """
-	    Extrai todos os códigos de postes (10 dígitos) da descrição de serviços
-	    e remove duplicatas mantendo a ordem de aparecimento
-	    """
-	    try:
-	        # Verifica se a descrição é vazia ou missing
-	        if pd.isna(self.descricao_servicos) or self.descricao_servicos == "":
-	            self.postes = []
-	            print(f"Aviso: Descrição de serviços vazia para evento em {self.bairro}")
-	            return
+        """
+        Extrai todos os códigos de postes (10 dígitos) da descrição de serviços
+        e remove duplicatas mantendo a ordem de aparecimento
+        """
+        try:
+            if self.descricao_servicos == "":
+                self.postes = []
+                print(f"Aviso: Descrição de serviços vazia para evento em {self.bairro}")
+                return
 	        
 	        # Converte para string para garantir que podemos usar regex
-	        descricao_str = str(self.descricao_servicos)
+            descricao_str = str(self.descricao_servicos)
 	        
 	        # Expressão regular para encontrar sequências de exatamente 10 dígitos
-	        padrao_postes = r'\b\d{10}\b'
+            padrao_postes = r'\b\d{10}\b'
 	        
 	        # Encontra todos os códigos de postes
-	        postes_encontrados = re.findall(padrao_postes, descricao_str)
+            postes_encontrados = re.findall(padrao_postes, descricao_str)
 	        
 	        # Remove duplicatas mantendo a ordem
-	        self.postes = list(dict.fromkeys(postes_encontrados))
+            self.postes = list(dict.fromkeys(postes_encontrados))
 	        
 	        # Log informativo
-	        if not self.postes:
-	            print(f"Aviso: Nenhum poste encontrado na descrição de {self}")
-	            
-	    except Exception as e:
-	        print(f"Erro ao extrair postes do evento em {self}: {str(e)}")
-	        self.postes = []  # Garante que a lista fique vazia em caso de erro
+            if not self.postes:
+                print(f"Aviso: Nenhum poste encontrado na descrição de {self}")
+                
+        except Exception as e:
+            self.postes = []  # Garante que a lista fique vazia em caso de erro
+            raise RuntimeError(f"Erro ao extrair postes do evento em {self}: {str(e)}")
+            
     
     def marcar_whitelist(self):
         """Marca o evento como estando na whitelist"""
@@ -95,19 +95,19 @@ class Evento:
     def gerar_corpo_email(self):
         """Gera o corpo completo do email"""
         corpo = f"""Saudações prezados da MEGA;
-
-A concessionária Amazonas Energia realizará uma manobra por poste(s) onde passa cabo de fibra da MetroMAO(CIRCUITO: IPMNS16401), em {self.endereco} - {self.bairro}.
-Solicitamos que a equipe G8 seja acionada para soltar e depois regularizar a sustentação dos cabos da MetroMAO. Segue abaixo a data e horário da realização da troca.
-
-Data da Operação: {self.data}
-Horário: De {self.horario_inicial} até {self.horario_final}
-Endereço: {self.endereco} - {self.bairro}
-Descrição de Serviço: 
-{self.descricao_servicos}
-
-Em anexo, região do mapa com o(s) poste(s) afetados.
-
-Att."""
+                A concessionária Amazonas Energia realizará uma manobra por poste(s) onde passa cabo de fibra da MetroMAO(CIRCUITO: IPMNS16401), em {self.endereco} - {self.bairro}.
+                Solicitamos que a equipe G8 seja acionada para soltar e depois regularizar a sustentação dos cabos da MetroMAO. Segue abaixo a data e horário da realização da troca.
+                
+                Data da Operação: {self.data}
+                Horário: De {self.horario_inicial} até {self.horario_final}
+                Endereço: {self.endereco} - {self.bairro}
+                Descrição de Serviço: 
+                
+                {self.descricao_servicos}
+                
+                Em anexo, região do mapa com o(s) poste(s) afetados.
+                
+                Att."""
         return corpo
     
     def esta_na_whitelist(self):
@@ -117,27 +117,25 @@ Att."""
 
 # Exemplo / Teste
 if __name__ == "__main__":
-
-	def criar_eventos_do_dataframe(df):
-	    """
-	    Cria uma lista de objetos Evento a partir de um DataFrame
-	    
-	    Args:
-	        df: DataFrame do pandas com os dados da planilha
+    import pandas as pd
+    def criar_eventos_do_dataframe(df):
+        """
+        Cria uma lista de objetos Evento a partir de um DataFrame
+        
+        Args:
+            df: DataFrame do pandas com os dados da planilha
 	    
 	    Returns:
 	        Lista de objetos Evento
 	    """
-	    eventos = []
-	    for index, linha in df.iterrows():
-	        evento = Evento(linha)
-	        eventos.append(evento)
-	    
-	    return eventos
+        eventos = []
+        for _, linha in df.iterrows():
+            evento = Evento(linha)
+            eventos.append(evento)
+            
+        return eventos
 
-    # Simulando o uso com seu código existente
-    df = pd.read_csv('./planilha/Cronograma_de_Linha_Morta_25-11-07.xlsx')
+    df = pd.read_excel('./planilha/Cronograma_de_Linha_Morta_25-11-07.xlsx')
     eventos = criar_eventos_do_dataframe(df)
     
-    # Agora você pode trabalhar com objetos em vez de DataFrame
-    print(evento)
+    print(eventos)
