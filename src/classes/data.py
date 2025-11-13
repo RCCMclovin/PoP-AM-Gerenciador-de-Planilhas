@@ -3,7 +3,7 @@ class Data:
     meses_com_30_dias = [4, 6, 9, 11]
 
     def __init__(self, data_str):
-        """Inicializa a data a partir de uma string no formato 'DD-MM-AAAA'"""
+        """Inicializa a data a partir de uma string no formato 'DD-MM-AAAA' ou 'AAAA-MM-DD'"""
 
         try: 
             self.dia = int(data_str[0:2])
@@ -33,7 +33,7 @@ class Data:
             try:
                 self += Data(other)
             except:
-                raise ValueError("String deve estar no formato 'DD-MM-AAAA'")
+                raise ValueError("String deve estar no formato 'DD-MM-AAAA' ou 'AAAA-MM-DD'")
         if self.mes == 2:
             if self._is_bissexto():
                 if self.dia > 29:
