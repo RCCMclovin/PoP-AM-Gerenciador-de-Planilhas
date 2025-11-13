@@ -4,9 +4,13 @@ import re
 
 
 class interface:
+	def __new__(cls):
+		if not hasattr(cls, 'instance'):
+			cls.instance = super(interface, cls).__new__(cls)
+		return cls.instance
 	def __init__(self):
-		self.blacklist = carregar_objeto('../../data/bairro_blacklist.pkl')
-		self.whitelist = carregar_objeto('../../data/poste_whitelist.pkl')
+		self.blacklist = carregar_objeto('./data/bairro_blacklist.pkl')
+		self.whitelist = carregar_objeto('./data/poste_whitelist.pkl')
 		self.eventos = [] #Inicializa a lista de enventos vazia
 
 	def add_whitelist(self, poste):
@@ -18,7 +22,7 @@ class interface:
 		except Exception as e:
 			raise RuntimeError(f"Erro ao adicionar poste na Whitelist {self}: {str(e)}")
 
-	def remove_whitelist(self, post):
+	def remove_whitelist(self, poste):
 		try:
 			if bool(re.match(r'^\d{10}$', str(poste))):
 				self.whitelist.remove(poste) 
@@ -52,8 +56,8 @@ class interface:
 
 if __name__ == "__main__":
 
-	salvar_objeto('outro bairro', '../../data/bairro_blacklist.pkl')
-	salvar_objeto('0987654321', '../../data/poste_whitelist.pkl')
+	salvar_objeto(['outro bairro'], './data/bairro_blacklist.pkl')
+	salvar_objeto(['0987654321'], './data/poste_whitelist.pkl')
 	i = interface()
 	i.add_whitelist("1234567890")
 	print(i.whitelist)
@@ -64,3 +68,5 @@ if __name__ == "__main__":
 	print(i.blacklist)
 	i.remove_blacklist("bairro qualquer")
 	print(i.blacklist)
+	i2 = interface()
+	print(i is i2)
