@@ -66,11 +66,6 @@ class Evento:
         except Exception as e:
             self.postes = []  # Garante que a lista fique vazia em caso de erro
             raise RuntimeError(f"Erro ao extrair postes do evento em {self}: {str(e)}")
-            
-    
-    def marcar_whitelist(self):
-        """Marca o evento como estando na whitelist"""
-        self.whitelist = True
     
     def to_dict(self):
         """Converte o evento para dicionário (útil para criar DataFrames)"""
