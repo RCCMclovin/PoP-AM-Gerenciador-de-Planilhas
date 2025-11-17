@@ -1,5 +1,5 @@
 import pandas as pd
-from src.classes import Evento
+from ..classes import Evento
 import warnings
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl') #Desabilita warns de openpyxl, que ocorrem devido ao cabeçalho da planilha
 

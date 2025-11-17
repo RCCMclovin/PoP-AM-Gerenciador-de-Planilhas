@@ -1,11 +1,4 @@
-# main.py
-import sys
-import os
-
-# Adiciona o diretório atual ao PYTHONPATH
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from src.classes.interface import Interface
+import pyplanilha
 
 def mostrar_menu():
     """Exibe o menu principal"""
@@ -150,7 +143,7 @@ def gerar_email_evento(interface):
 
 def main():
     """Função principal do programa"""
-    interface = Interface()
+    interface = pyplanilha.Interface()
     
     print("Bem-vindo ao Sistema de Gerenciamento de Eventos!")
     print("Antes de começar, certifique-se de que a planilha está no caminho correto.")

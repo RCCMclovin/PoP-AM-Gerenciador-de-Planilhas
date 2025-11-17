@@ -7,8 +7,12 @@ def salvar_objeto(objeto, nome_arquivo):
         objeto: O objeto a ser salvo.
         nome_arquivo (str): O nome do arquivo onde o objeto será salvo.
     """
-    with open(nome_arquivo, 'wb') as arquivo:
-        pickle.dump(objeto, arquivo)
+    try:
+        with open(nome_arquivo, 'wb') as arquivo:
+            pickle.dump(objeto, arquivo)
+    except Exception as e:
+        raise RuntimeError(f"Erro ao salvar o objeto {objeto} em {nome_arquivo}: {str(e)}")
+    
     
 def carregar_objeto(nome_arquivo):
     """Carrega um objeto de um arquivo usando pickle.
@@ -19,8 +23,13 @@ def carregar_objeto(nome_arquivo):
     Returns:
         O objeto carregado do arquivo.
     """
-    with open(nome_arquivo, 'rb') as arquivo:
-        objeto = pickle.load(arquivo)
+    try: 
+        with open(nome_arquivo, 'rb') as arquivo:
+            objeto = pickle.load(arquivo)
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"Erro ao carregar o objeto de {nome_arquivo}: {str(e)}")
+    except Exception as e:
+        raise RuntimeError(f"Erro ao carregar o objeto de {nome_arquivo}: {str(e)}")
     return objeto
 
 
