@@ -5,7 +5,7 @@ warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl') #Desa
 
 def parse_planilha(file_path):
     """
-    Parses an Excel file and returns a DataFrame.
+    Parses an Excel file and returns a List of Events.
 
     Parameters:
     file_path (str): The path to the Excel file.
