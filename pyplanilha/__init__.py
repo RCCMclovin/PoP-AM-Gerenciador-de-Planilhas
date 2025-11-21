@@ -1,1 +1,1 @@
-from pyplanilha.classes import Data, Evento, Interface
+from pyplanilha.classes import Data, Evento, InterfaceAPI, MainWindow

@@ -8,6 +8,7 @@ from pyplanilha.tools.parser import parse_planilha
 class InterfaceAPI:
     whitelist_path = './data/poste_whitelist.pkl'
     blacklist_path = './data/bairro_blacklist.pkl'
+    events_path = './data/events.pkl'
 
     def __new__(cls):
         """Implementação do padrão Singleton para garantir apensas uma intância da interface."""
@@ -27,17 +28,21 @@ class InterfaceAPI:
             self.whitelist = []
 
         # Lista de eventos (objetos Evento)
-        self.eventos = []
+        try:
+            self.eventos = carregar_objeto(InterfaceAPI.events_path)
+        except FileNotFoundError:
+            self.eventos = []
 
 
     def carregar_planilha(self, path: str) -> int:
         """
-        Carrega a planilha e popula self.eventos com objetos Evento.
+        Carrega a planilha sobreescrevendo self.eventos com objetos Evento.
         Retorna a quantidade de eventos brutos.
         """
         self.eventos = parse_planilha(path)
         for evento in self.eventos:
             evento.whitelist = any(p in self.whitelist for p in evento.postes)
+        salvar_objeto(self.eventos, InterfaceAPI.events_path)
         return len(self.eventos)
 
 
@@ -58,6 +63,10 @@ class InterfaceAPI:
         ]
 
         self.eventos = eventos_filtrados
+        salvar_objeto(self.eventos, InterfaceAPI.events_path)
+        return len(self.eventos)
+    
+    def len_eventos(self):
         return len(self.eventos)
 
 

@@ -11,5 +11,5 @@ pip install -r requirements.txt
 Para executar a interface:
 
 ~~~shell
-python gui_main.py
+python main.py
 ~~~
