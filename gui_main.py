@@ -33,12 +33,9 @@ from PyQt6.QtGui import QRegularExpressionValidator
 from pyplanilha.classes.interface_api import InterfaceAPI
 
 
-# =========================
-# Worker para carregar planilha (thread)
-# =========================
 class LoadPlanilhaWorker(QObject):
-    finished = pyqtSignal(int)   # total de eventos
-    error = pyqtSignal(str)      # mensagem de erro
+    finished = pyqtSignal(int)
+    error = pyqtSignal(str)
 
     def __init__(self, api: InterfaceAPI, path: str):
         super().__init__()
@@ -53,9 +50,6 @@ class LoadPlanilhaWorker(QObject):
             self.error.emit(str(e))
 
 
-# =========================
-# Diálogo para gerenciar listas
-# =========================
 class ListasDialog(QDialog):
     """
     Diálogo para gerenciar Whitelist (postes) e Blacklist (bairros)
@@ -194,9 +188,6 @@ class ListasDialog(QDialog):
         self.carregar_listas()
 
 
-# =========================
-# Diálogo de e-mail
-# =========================
 class EmailDialog(QDialog):
     """
     Diálogo para exibir o e-mail gerado de um evento.
@@ -242,9 +233,6 @@ class EmailDialog(QDialog):
         QMessageBox.information(self, "Copiado", "E-mail copiado para a área de transferência.")
 
 
-# =========================
-# Janela principal
-# =========================
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -262,9 +250,6 @@ class MainWindow(QMainWindow):
         layout_principal.setContentsMargins(16, 16, 16, 16)
         layout_principal.setSpacing(12)
 
-        # ---------------------------
-        # Linha: seleção de arquivo
-        # ---------------------------
         layout_arquivo = QHBoxLayout()
         layout_arquivo.setSpacing(8)
 
@@ -284,13 +269,9 @@ class MainWindow(QMainWindow):
 
         layout_principal.addLayout(layout_arquivo)
 
-        # Status da planilha
         self.label_status = QLabel("Nenhuma planilha carregada.")
         layout_principal.addWidget(self.label_status)
 
-        # ---------------------------
-        # Botões principais
-        # ---------------------------
         layout_botoes = QHBoxLayout()
         layout_botoes.setSpacing(10)
 
@@ -312,9 +293,6 @@ class MainWindow(QMainWindow):
 
         layout_principal.addLayout(layout_botoes)
 
-        # ---------------------------
-        # Tabela de eventos
-        # ---------------------------
         self.tabela_eventos = QTableWidget()
         self.tabela_eventos.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.tabela_eventos.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
@@ -324,19 +302,14 @@ class MainWindow(QMainWindow):
 
         layout_principal.addWidget(self.tabela_eventos, stretch=1)
 
-        # Status bar
         status_bar = QStatusBar()
         self.setStatusBar(status_bar)
         self.statusBar().showMessage("Pronto")
 
         self.setCentralWidget(container)
 
-        # Caminho padrão (se quiser)
         self.input_caminho.setText("./planilha/Cronograma_de_Linha_Morta_25-11-07.xlsx")
 
-    # ========================
-    # Funções de UI
-    # ========================
     def escolher_arquivo(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self,
@@ -357,7 +330,6 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(self, "Erro", f"Arquivo não encontrado:\n{caminho}")
             return
 
-        # Diálogo de "Carregando..."
         self.progress = QProgressDialog(
             "Carregando planilha, por favor aguarde...",
             None,
@@ -371,7 +343,6 @@ class MainWindow(QMainWindow):
         self.progress.setMinimumDuration(0)
         self.progress.show()
 
-        # Thread + worker
         self._load_thread = QThread(self)
         self._load_worker = LoadPlanilhaWorker(self.api, caminho)
         self._load_worker.moveToThread(self._load_thread)
@@ -380,7 +351,6 @@ class MainWindow(QMainWindow):
         self._load_worker.finished.connect(self._on_load_finished)
         self._load_worker.error.connect(self._on_load_error)
 
-        # cleanup
         self._load_worker.finished.connect(self._load_thread.quit)
         self._load_worker.error.connect(self._load_thread.quit)
         self._load_thread.finished.connect(self._load_thread.deleteLater)
@@ -437,8 +407,6 @@ class MainWindow(QMainWindow):
     def acao_listas(self):
         dlg = ListasDialog(self.api, self)
         if dlg.exec():
-            # se quiser refiltrar automaticamente após editar listas:
-            # self.acao_filtrar()
             pass
 
     def acao_email(self):
@@ -456,9 +424,6 @@ class MainWindow(QMainWindow):
         dlg = EmailDialog(email["assunto"], email["corpo"], self)
         dlg.exec()
 
-    # ========================
-    # Tabela
-    # ========================
     def atualizar_tabela_eventos(self):
         eventos = self.api.eventos
 
