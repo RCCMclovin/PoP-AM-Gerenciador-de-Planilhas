@@ -30,10 +30,10 @@ Para solucionar este problema a aplicação foi criada com as seguintes funçõe
      <br/>-Remover elementos;<br/><br/>
 4. Gerar e-mail comunicando o evento para a equipe de manutenção, contendo os campos necessários para a atividade como Data, Horário Inicial, Horário Final, Endereço, Descrição do Evento.<br/><br/>
 
-Todas as funções são realizadas através de uma interface gráfica desenvolvida em PyQt6, com sumporte para algumas funções de qualidade de vida, incluindo, mas não somente:
-  <br/>1. Seletor de arquivos, para escolher a planilha a ser carregada;
-  <br/>2. Memória persistente da última lista de eventos trabalhada;
-  <br/>3. Combobox na visualização de eventos, permitindo agilizar as ações de Gerar e-mail, adicionar elementos a Blacklist e Whitelist, e copiar o endereço do evento;
-  <br/>4. Possibilitar a inserção de múltiplos elementos simultâneos na Whitelist e Blacklist;
+Todas as funções são realizadas através de uma interface gráfica desenvolvida em PyQt6, com sumporte para algumas funções de qualidade de vida, incluindo, mas não somente:<br/>
+1. Seletor de arquivos, para escolher a planilha a ser carregada;<br/><br/>
+2. Memória persistente da última lista de eventos trabalhada;<br/><br/>
+3. Combobox na visualização de eventos, permitindo agilizar as ações de Gerar e-mail, adicionar elementos a Blacklist e Whitelist, e copiar o endereço do evento;<br/><br/>
+4. Possibilitar a inserção de múltiplos elementos simultâneos na Whitelist e Blacklist;<br/><br/>
 
      
