@@ -30,7 +30,7 @@ Para solucionar este problema a aplicação foi criada com as seguintes funçõe
 
 3) Gerenciar as listas utilizadas para filtrar os eventos (Blacklist de Bairros e Whitelist de Postes). Isso inclui:
      * Visualizar as listas;
-     * Adicionaar elementos;
+     * Adicionar elementos;
      * Remover elementos;
 
 4) Gerar e-mail comunicando o evento para a equipe de manutenção, contendo os campos necessários para a atividade como Data, Horário Inicial, Horário Final, Endereço, Descrição do Evento.
