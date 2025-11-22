@@ -24,7 +24,7 @@ Para solucionar este problema a aplicação foi criada com as seguintes funçõe
    <br/>-Remover eventos cujo campo Status sejam "Cancelados" (evento não ocorrerá mais) ou "Realizados" (evento já ocorreu);
    <br/>-Remover eventos cujo campo Bairro esteja na Blacklist, com exceção dos eventos que também possuem um ou mais postes na Whitelist;
    <br/>Obs: Essas políticas utilizam filtragem por exclusão, com o objetivo de combater erros humanos e a falta de padrões e informações.<br/>
-3. Gerenciar as listas utilizadas para filtrar os eventos (Blacklist de Bairros e Whitelist de Postes). Isso inclui:<br/><br/>
+3. Gerenciar as listas utilizadas para filtrar os eventos (Blacklist de Bairros e Whitelist de Postes). Isso inclui:<br/>
      <br/>-Visualizar as listas;
      <br/>-Adicionaar elementos;
      <br/>-Remover elementos;<br/>
