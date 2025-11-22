@@ -30,12 +30,12 @@ Para solucionar este problema a aplicação foi criada com as seguintes funçõe
 
 3) Gerenciar as listas utilizadas para filtrar os eventos (Blacklist de Bairros e Whitelist de Postes). Isso inclui:
      * Visualizar as listas;
-     * Adicionaar elementos;
+     * Adicionar elementos;
      * Remover elementos;
 
 4) Gerar e-mail comunicando o evento para a equipe de manutenção, contendo os campos necessários para a atividade como Data, Horário Inicial, Horário Final, Endereço, Descrição do Evento.
 
-Todas as funções são realizadas através de uma interface gráfica desenvolvida em PyQt6, com sumporte para algumas funções de qualidade de vida, incluindo, mas não somente:
+Todas as funções são realizadas através de uma interface gráfica desenvolvida em PyQt6, com suporte para algumas funções de qualidade de vida, incluindo, mas não somente:
 
 1) Seletor de arquivos, para escolher a planilha a ser carregada;
 
