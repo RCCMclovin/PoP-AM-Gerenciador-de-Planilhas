@@ -19,16 +19,16 @@ Estes eventos são avisados através de uma planilha, feita por um ser humano se
 Para solucionar este problema a aplicação foi criada com as seguintes funções:
 <br/>
 1. Carregar uma planilha de eventos de manutenção, remoção e adição de postes.<br/><br/>
-2. Filtrar os eventos, levando em consideração as seguintes regras:<br/>
+2. Filtrar os eventos, levando em consideração as seguintes regras:
    <br/>-Remover eventos cujo campo Uso Mútuo sejam "Não" (indica que não há fibra ótica no(s) poste(s));
    <br/>-Remover eventos cujo campo Status sejam "Cancelados" (evento não ocorrerá mais) ou "Realizados" (evento já ocorreu);
    <br/>-Remover eventos cujo campo Bairro esteja na Blacklist, com exceção dos eventos que também possuem um ou mais postes na Whitelist;
-   <br/>Obs: Essas políticas utilizam filtragem por exclusão, com o objetivo de combater erros humanos e a falta de padrões e informações.<br/>
-3. Gerenciar as listas utilizadas para filtrar os eventos (Blacklist de Bairros e Whitelist de Postes). Isso inclui:<br/>
+   <br/>Obs: Essas políticas utilizam filtragem por exclusão, com o objetivo de combater erros humanos e a falta de padrões e informações.<br/><br/>
+3. Gerenciar as listas utilizadas para filtrar os eventos (Blacklist de Bairros e Whitelist de Postes). Isso inclui:
      <br/>-Visualizar as listas;
      <br/>-Adicionaar elementos;
-     <br/>-Remover elementos;<br/>
-4. Gerar e-mail comunicando o evento para a equipe de manutenção, contendo os campos necessários para a atividade como Data, Horário Inicial, Horário Final, Endereço, Descrição do Evento.<br/>
+     <br/>-Remover elementos;<br/><br/>
+4. Gerar e-mail comunicando o evento para a equipe de manutenção, contendo os campos necessários para a atividade como Data, Horário Inicial, Horário Final, Endereço, Descrição do Evento.<br/><br/>
 
 Todas as funções são realizadas através de uma interface gráfica desenvolvida em PyQt6, com sumporte para algumas funções de qualidade de vida, incluindo, mas não somente:<br/>
   <br/>1. Seletor de arquivos, para escolher a planilha a ser carregada;
