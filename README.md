@@ -1,7 +1,8 @@
 # Gerenciador de planilhas para o PoP-AM
 
 Este trabalho foi criado para a disciplina de introdução à Python, do projeto Connor - Pós-Graduação em cibersegurança.
-Membros da Equipe: Gabriel Toledano Feitosa, Larissa de Andrade Silva, Rafael Castilho Carvalho
+
+Membros da Equipe: Gabriel Toledano Feitosa (gtf@icomp.ufam.edu.br), Larissa de Andrade Silva (las@icomp.ufam.edu.br), Rafael Castilho Carvalho (rcc.icomp.ufam.edu.br)
 
 Antes de executar o código:
 
