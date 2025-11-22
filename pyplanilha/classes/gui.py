@@ -223,6 +223,7 @@ class MainWindow(QMainWindow):
     def acao_listas(self):
         dlg = ListasDialog(self.api, self)
         dlg.exec()
+        self.atualizar_tabela_eventos()
 
     def acao_email(self):
         linha = self.tabela_eventos.currentRow()
