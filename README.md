@@ -46,7 +46,7 @@ Todas as funções são realizadas através de uma interface gráfica desenvolvi
 3) Combobox na visualização de eventos, permitindo agilizar as ações de Gerar e-mail, adicionar elementos a Blacklist e Whitelist, e copiar o endereço do evento;
 
 4) Possibilitar a inserção de múltiplos elementos simultâneos na Whitelist e Blacklist;
-   
+
 Link para Apresentação da Aplicação: [https://drive.google.com/file/d/1PGE-X6CdqhoIhp7Zixt0EnzJvknZq1JJ/view?usp=sharing](https://drive.google.com/file/d/1PGE-X6CdqhoIhp7Zixt0EnzJvknZq1JJ/view?usp=sharing)
 
 Projeto disponível em: [https://github.com/RCCMclovin/PoP-AM-Gerenciador-de-Planilhas](https://github.com/RCCMclovin/PoP-AM-Gerenciador-de-Planilhas)
