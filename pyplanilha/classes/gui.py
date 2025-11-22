@@ -120,7 +120,7 @@ class MainWindow(QMainWindow):
 
         if len(self.api.eventos) > 0:
             self.label_status.setText(
-            f"Planilha anterior carregada com sucesso. Eventos brutos: {self.api.len_eventos()}"
+            f"Planilha anterior carregada com sucesso. Eventos: {self.api.len_eventos()}"
         )
             for btn in (self.btn_filtrar, self.btn_listas, self.btn_email):
                 btn.setEnabled(True)
